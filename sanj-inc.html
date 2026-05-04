@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sanj inc. | Curated Beauty Routines</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&family=Alex+Brush&display=swap" rel="stylesheet">
+    <style>
+
+        :root {
+            --bg: #f3efe9;
+            --pink: #f0aac1;
+            --dark: #1a1a1a;
+            --serif: 'Playfair Display', serif;
+            --sans: 'Inter', sans-serif;
+            --script: 'Alex Brush', cursive;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--dark);
+            font-family: var(--sans);
+            line-height: 1.6;
+        }
+
+        .site-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            border-left: 1px solid var(--dark);
+            border-right: 1px solid var(--dark);
+            min-height: 100vh;
+        }
+
+        /* header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid var(--dark);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--script);
+            font-size: 3rem;
+            color: var(--pink);
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        nav ul { list-style: none; display: flex; gap: 2.5rem; }
+        nav > ul > li { position: relative; }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg);
+            min-width: 180px;
+            border: 1px solid var(--dark);
+            z-index: 100;
+        }
+
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-transform: none;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--dark);
+        }
+
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background: var(--pink); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* hero */
+        .hero {
+            display: flex;
+            border-bottom: 1px solid var(--dark);
+        }
+
+        .hero-image-col {
+            flex: 1;
+            border-right: 1px solid var(--dark);
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 600px;
+            background: #e4ddd1;
+            border: 1px solid var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text-col {
+            flex: 1;
+            padding: 5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .script-accent {
+            font-family: var(--script);
+            color: var(--pink);
+            font-size: 4rem;
+            margin-bottom: -1.5rem;
+            margin-left: -1rem;
+            transform: rotate(-5deg);
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            max-width: 90%;
+            margin-bottom: 1.5rem;
+        }
+
+        /* i like this blockquote style */
+        .hero-highlight {
+            font-weight: 500;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            border-left: 3px solid var(--pink);
+            padding-left: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--pink);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 1rem 3rem;
+            border: 1px solid var(--dark);
+            border-radius: 50px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            text-align: center;
+            width: fit-content;
+            transition: background 0.3s;
+        }
+
+        .btn:hover { background: #e69ab3; }
+
+        /* scrolling banner thing */
+        .marquee-wrapper {
+            background: var(--pink);
+            border-bottom: 1px solid var(--dark);
+            overflow: hidden;
+            padding: 0.8rem 0;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .section-header {
+            padding: 4rem 3rem;
+            border-bottom: 1px solid var(--dark);
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+        }
+
+        /* product cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .product-card {
+            border-right: 1px solid var(--dark);
+            border-bottom: 1px solid var(--dark);
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+
+        .product-card:nth-child(3n) { border-right: none; }
+        .product-card:hover { background: #faf7f2; }
+
+        .product-img-box {
+            width: 100%;
+            height: 250px;
+            background: #fff;
+            border: 1px solid var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .product-category {
+            font-family: var(--script);
+            font-size: 2rem;
+            color: var(--pink);
+            margin-bottom: -0.5rem;
+        }
+
+        .product-title {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .product-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-family: var(--serif);
+            font-style: italic;
+            border-bottom: 1px solid var(--dark);
+            align-self: flex-start;
+            padding-bottom: 2px;
+            margin-top: 1rem;
+        }
+
+        footer {
+            padding: 4rem 3rem;
+            text-align: center;
+            font-family: var(--serif);
+            border-top: 1px solid var(--dark);
+        }
+
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; }
+            .hero-image-col { border-right: none; border-bottom: 1px solid var(--dark); padding: 2rem; }
+            .hero-text-col { width: 100%; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-card:nth-child(2n) { border-right: none; }
+            .product-card:nth-child(3n) { border-right: 1px solid var(--dark); }
+        }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hero-title { font-size: 3.5rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .product-card { border-right: none !important; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="site-wrapper">
+
+        <header>
+            <a href="#" class="logo">sanj inc.</a>
+            <nav>
+                <ul>
+                    <li class="dropdown">
+                        <a href="#skincare">Skincare</a>
+                        <div class="dropdown-content">
+                            <a href="#skincare">Cleansers & Toners</a>
+                            <a href="#skincare">Serums & Treatments</a>
+                            <a href="#skincare">Moisturizer & SPF</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#makeup">Makeup</a>
+                        <div class="dropdown-content">
+                            <a href="#makeup">Face & Base</a>
+                            <a href="#makeup">Cheeks & Bronzer</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#haircare">Haircare</a>
+                        <div class="dropdown-content">
+                            <a href="#haircare">Dry Shampoo</a>
+                            <a href="#haircare">Treatments</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-image-col">
+                <div class="hero-image-placeholder">
+                    <img src="sanjana-photo.jpg" alt="Sanjana">
+                </div>
+            </div>
+            <div class="hero-text-col">
+                <div class="script-accent">Hi! I'm Sanjana...</div>
+                <h1 class="hero-title">Curated Beauty, Demystified.</h1>
+                <p class="hero-desc">Growing up, I never knew what kind of routine to use. Between makeup, skincare, and haircare, the industry is overwhelming. I made this website to help create routines based off of specific skin types and figure out what generally applies to <i>you</i>.</p>
+                <p class="hero-highlight">This is your all-in-one website to see the best products for different types of skin, hair, and expert makeup advice.</p>
+                <a href="#skincare" class="btn">Discover Your Routine →</a>
+            </div>
+        </section>
+
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                ✦ ALL-IN-ONE BEAUTY ✦ EXPERT SKINCARE ✦ FLAWLESS MAKEUP ✦ HEALTHY HAIRCARE ✦ ALL-IN-ONE BEAUTY ✦ EXPERT SKINCARE ✦ FLAWLESS MAKEUP ✦ HEALTHY HAIRCARE ✦ ALL-IN-ONE BEAUTY ✦ EXPERT SKINCARE ✦ FLAWLESS MAKEUP ✦ HEALTHY HAIRCARE ✦
+            </div>
+        </div>
+
+        <section id="skincare">
+            <div class="section-header">
+                <h2>The Skincare Edit</h2>
+            </div>
+            <div class="product-grid">
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="aha-serum.jpg" alt="AHA Serum"></div>
+                    <div>
+                        <div class="product-category">Treatment</div>
+                        <h3 class="product-title">5% AHA Serum Deodorant</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/5-aha-serum-deodorant-pimprod2050648?sku=2636802" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="hyaluronic.jpg" alt="Hyaluronic Acid"></div>
+                    <div>
+                        <div class="product-category">Serum</div>
+                        <h3 class="product-title">Hyaluronic Acid Serum</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/hyaluronic-acid-serum-pimprod2023925?sku=2596107" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="milky-toner.jpg" alt="Milky Toner"></div>
+                    <div>
+                        <div class="product-category">Toner</div>
+                        <h3 class="product-title">Hydrating Milky Toner</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/hydrating-milky-toner-pimprod2043230?sku=2620406" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="birch-juice.jpg" alt="Birch Juice SPF"></div>
+                    <div>
+                        <div class="product-category">Sun Protection</div>
+                        <h3 class="product-title">Birch Juice Moisturizing SPF 50+</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/birch-juice-moisturizing-uvlock-spf-45-pimprod2049647?sku=2634356" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="differin.jpg" alt="Differin Treatment"></div>
+                    <div>
+                        <div class="product-category">Acne Care</div>
+                        <h3 class="product-title">Differin 10% BPO Spot Treatment</h3>
+                    </div>
+                    <a href="https://www.target.com/p/differin-10-bpo-spot-treatment/-/A-91370206" target="_blank" class="product-link">Shop at Target →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="vitamin-c.jpg" alt="Vitamin C"></div>
+                    <div>
+                        <div class="product-category">Brightening</div>
+                        <h3 class="product-title">Naturium Vitamin C Complex Serum</h3>
+                    </div>
+                    <a href="https://www.target.com/p/naturium-vitamin-c-complex-serum-1-fl-oz/-/A-80184023" target="_blank" class="product-link">Shop at Target →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="prequel-cleanser.jpg" alt="Prequel Cleanser"></div>
+                    <div>
+                        <div class="product-category">Cleanse</div>
+                        <h3 class="product-title">Prequel Facial Gleanser</h3>
+                    </div>
+                    <a href="https://www.target.com/p/prequel-facial-gleanser-13-5-fl-oz/-/A-89210172" target="_blank" class="product-link">Shop at Target →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="prequel-moisturizer.jpg" alt="Prequel Moisturizer"></div>
+                    <div>
+                        <div class="product-category">Moisturize</div>
+                        <h3 class="product-title">Prequel Urea Moisturizer</h3>
+                    </div>
+                    <a href="https://www.target.com/p/prequel-urea-moisturizer-13-5-fl-oz/-/A-89210164" target="_blank" class="product-link">Shop at Target →</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="makeup">
+            <div class="section-header">
+                <h2>The Makeup Edit</h2>
+            </div>
+            <div class="product-grid">
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="foundation.jpg" alt="Foundation"></div>
+                    <div>
+                        <div class="product-category">Base</div>
+                        <h3 class="product-title">Mask Fit Red Cushion Foundation</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/mask-fit-red-cushion-pimprod2053403?sku=2642702" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="bronzer.jpg" alt="Bronzer"></div>
+                    <div>
+                        <div class="product-category">Bronzer</div>
+                        <h3 class="product-title">Buttermelt Pressed Powder Bronzer</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/buttermelt-pressed-powder-natural-finish-bronzer-pimprod2044366?sku=2623793" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="haircare">
+            <div class="section-header">
+                <h2>The Haircare Edit</h2>
+            </div>
+            <div class="product-grid">
+
+                <article class="product-card">
+                    <div class="product-img-box"><img src="dry-shampoo.jpg" alt="Dry Shampoo"></div>
+                    <div>
+                        <div class="product-category">Refresh</div>
+                        <h3 class="product-title">Clean Freak Dark Hair Dry Shampoo</h3>
+                    </div>
+                    <a href="https://www.ulta.com/p/clean-freak-dark-hair-dry-shampoo-powder-pimprod2052462?sku=2641614" target="_blank" class="product-link">Shop at Ulta →</a>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div class="logo" style="font-size: 2rem; margin-bottom: 1rem;">sanj inc.</div>
+            <p>&copy; 2026 sanj inc. Created for ITSS3390.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
